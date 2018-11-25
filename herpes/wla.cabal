@@ -22,6 +22,8 @@ library
 
     default-extensions:
         ApplicativeDo,
+        GADTs,
+        KindSignatures,
         StrictData
 
     build-depends:
