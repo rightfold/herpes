@@ -1,0 +1,32 @@
+cabal-version: >= 1.10
+build-type: Simple
+
+name: herpes
+version: 0.0.0.0
+
+library
+    hs-source-dirs:
+        src
+
+    exposed-modules:
+        Herpes.Form,
+        Herpes.Form.Generic
+
+    default-language:
+        Haskell2010
+
+    ghc-options:
+        -Wall
+        -Wincomplete-record-updates
+        -Wincomplete-uni-patterns
+
+    default-extensions:
+        ApplicativeDo,
+        StrictData
+
+    build-depends:
+        base,
+        free,
+        generics-sop,
+        kan-extensions,
+        text
