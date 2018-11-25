@@ -6,7 +6,7 @@ module Herpes.Form
   , textField
 
     -- * Composite forms
-  , labeledField
+  , labeledForm
 
     -- * Simple wizards
   , Wizard
@@ -35,8 +35,8 @@ textField = liftAp . liftCoyoneda . TextField
 --------------------------------------------------------------------------------
 -- Composite forms
 
-labeledField :: Text -> Form a -> Form a
-labeledField l f = labelField l *> f
+labeledForm :: Text -> Form a -> Form a
+labeledForm l f = labelField l *> f
 
 --------------------------------------------------------------------------------
 -- Simple wizards

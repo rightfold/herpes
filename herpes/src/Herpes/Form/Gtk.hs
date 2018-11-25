@@ -11,7 +11,7 @@ import Control.Applicative.Free (runAp)
 import Data.Foldable (for_)
 import Data.Functor.Coyoneda (Coyoneda (..))
 import Data.Semigroup ((<>))
-import Herpes.Form (Field (..), Form, labeledField, textField)
+import Herpes.Form (Field (..), Form, labeledForm, textField)
 
 import qualified Graphics.UI.Gtk as Gtk
 import qualified System.Glib.Attributes as Glib
@@ -55,9 +55,9 @@ example = do
 
   (widgets, get) <-
     renderForm $
-      (,,) <$> labeledField "Name" (textField "Arian")
-           <*> labeledField "Age"  (textField "23")
-           <*> labeledField "Food" (textField "rijst")
+      (,,) <$> labeledForm "Name" (textField "Arian")
+           <*> labeledForm "Age"  (textField "23")
+           <*> labeledForm "Food" (textField "rijst")
 
   vbox <- Gtk.toBox <$> Gtk.vBoxNew False 10
   for_ widgets $ \widget ->
