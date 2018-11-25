@@ -23,11 +23,18 @@ library
 
     default-extensions:
         ApplicativeDo,
+        DataKinds,
+        DeriveAnyClass,
         DeriveFunctor,
+        DeriveGeneric,
         DerivingStrategies,
+        EmptyCase,
+        FlexibleContexts,
         GADTs,
         KindSignatures,
         MonadComprehensions,
+        OverloadedStrings,
+        ScopedTypeVariables,
         StrictData,
         TypeApplications
 

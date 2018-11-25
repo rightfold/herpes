@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Herpes.Form.Gtk
   ( renderForm
   , renderField
@@ -11,8 +9,12 @@ import Control.Applicative.Free (runAp)
 import Data.Foldable (for_)
 import Data.Functor.Coyoneda (Coyoneda (..))
 import Data.Semigroup ((<>))
-import Herpes.Form (Field (..), Form, labeledForm, textField)
+import Data.Text (Text)
+import Herpes.Form (Field (..), Form)
+import Herpes.Form.Generic (gformlet)
 
+import qualified GHC.Generics as Ghc
+import qualified Generics.SOP as Sop
 import qualified Graphics.UI.Gtk as Gtk
 
 newtype GtkForm a =
@@ -43,15 +45,20 @@ renderField (TextField value) = do
   Gtk.entrySetText entry value
   pure ([Gtk.toWidget entry], Gtk.entryGetText entry)
 
+data User =
+  User
+    { userName :: Text
+    , userAge  :: Text
+    , userFood :: Text }
+  deriving stock (Ghc.Generic, Show)
+  deriving anyclass (Sop.Generic, Sop.HasDatatypeInfo)
+
 example :: IO ()
 example = do
   _ <- Gtk.initGUI
 
-  (widgets, get) <-
-    renderForm $
-      (,,) <$> labeledForm "Name" (textField "Arian")
-           <*> labeledForm "Age"  (textField "23")
-           <*> labeledForm "Food" (textField "rijst")
+  (widgets, get) <- renderForm $
+    gformlet User { userName = "Arian", userAge = "23", userFood = "rijst" }
 
   vbox <- Gtk.toBox <$> Gtk.vBoxNew False 10
   for_ widgets $ \widget ->
