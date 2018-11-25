@@ -23,9 +23,13 @@ library
 
     default-extensions:
         ApplicativeDo,
+        DeriveFunctor,
+        DerivingStrategies,
         GADTs,
         KindSignatures,
-        StrictData
+        MonadComprehensions,
+        StrictData,
+        TypeApplications
 
     build-depends:
         base,

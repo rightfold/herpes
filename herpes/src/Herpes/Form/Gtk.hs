@@ -1,31 +1,74 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Herpes.Form.Gtk
   ( renderForm
   , renderField
+
+  , example
   ) where
 
-import Control.Applicative.Free (runAp_)
+import Control.Applicative.Free (runAp)
+import Data.Foldable (for_)
 import Data.Functor.Coyoneda (Coyoneda (..))
-import Herpes.Form (Field (..), Form)
+import Data.Semigroup ((<>))
+import Herpes.Form (Field (..), Form, labeledField, textField)
 
-import qualified Graphics.UI.Gtk.Abstract.Widget as Gtk
-import qualified Graphics.UI.Gtk.Display.Label as Gtk
-import qualified Graphics.UI.Gtk.Multiline.TextBuffer as Gtk
-import qualified Graphics.UI.Gtk.Multiline.TextView as Gtk
+import qualified Graphics.UI.Gtk as Gtk
 import qualified System.Glib.Attributes as Glib
 
-renderForm :: Form a -> IO [Gtk.Widget]
-renderForm =
-  runAp_ $ \(Coyoneda _ field) ->
-    renderField field
+newtype GtkForm a =
+  GtkForm { runGtkForm :: IO ([Gtk.Widget], IO a) }
+  deriving stock (Functor)
 
-renderField :: Field a -> IO [Gtk.Widget]
+instance Applicative GtkForm where
+  pure x = GtkForm $ pure ([], pure x)
+  (<*>) (GtkForm a) (GtkForm b) = GtkForm $
+    [ (aws <> bws, ar <*> br) | (aws, ar) <- a, (bws, br) <- b ]
+
+renderForm :: Form a -> IO ([Gtk.Widget], IO a)
+renderForm form =
+  let
+    step (Coyoneda result field) =
+      result <$> GtkForm (renderField field)
+  in
+    runGtkForm (runAp step form)
+
+renderField :: Field a -> IO ([Gtk.Widget], IO a)
 
 renderField (LabelField text) = do
   label <- Gtk.labelNew (Just text)
-  pure [Gtk.toWidget label]
+  pure ([Gtk.toWidget label], pure ())
 
 renderField (TextField value) = do
   textView <- Gtk.textViewNew
   textBuffer <- Glib.get textView Gtk.textViewBuffer
   Gtk.textBufferSetText textBuffer value
-  pure [Gtk.toWidget textView]
+  let getValue = do
+        startIter <- Gtk.textBufferGetStartIter textBuffer
+        endIter   <- Gtk.textBufferGetEndIter   textBuffer
+        Gtk.textBufferGetText textBuffer startIter endIter False
+  pure ([Gtk.toWidget textView], getValue)
+
+example :: IO ()
+example = do
+  _ <- Gtk.initGUI
+
+  (widgets, get) <-
+    renderForm $
+      (,,) <$> labeledField "Name" (textField "Arian")
+           <*> labeledField "Age"  (textField "23")
+           <*> labeledField "Food" (textField "rijst")
+
+  vbox <- Gtk.toBox <$> Gtk.vBoxNew False 10
+  for_ widgets $ \widget ->
+    Gtk.boxPackStart vbox widget Gtk.PackNatural 0
+
+  submit <- Gtk.buttonNewWithLabel @String "Submit"
+  _ <- Gtk.on submit Gtk.buttonActivated $ print =<< get
+  Gtk.boxPackStart vbox submit Gtk.PackNatural 0
+
+  window <- Gtk.windowNew
+  Gtk.containerAdd window vbox
+  Gtk.widgetShowAll window
+
+  Gtk.mainGUI
