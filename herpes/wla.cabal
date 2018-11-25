@@ -10,7 +10,8 @@ library
 
     exposed-modules:
         Herpes.Form,
-        Herpes.Form.Generic
+        Herpes.Form.Generic,
+        Herpes.Form.Gtk
 
     default-language:
         Haskell2010
@@ -30,5 +31,7 @@ library
         base,
         free,
         generics-sop,
+        glib,
+        gtk,
         kan-extensions,
         text
