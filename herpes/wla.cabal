@@ -35,7 +35,6 @@ library
         base,
         free,
         generics-sop,
-        glib,
         gtk,
         kan-extensions,
         text

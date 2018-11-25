@@ -2,7 +2,6 @@
 , base
 , free
 , generics-sop
-, glib
 , gtk
 , kan-extensions
 , text }:
@@ -15,7 +14,6 @@ mkDerivation {
         base
         free
         generics-sop
-        glib
         gtk
         kan-extensions
         text

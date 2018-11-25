@@ -14,7 +14,6 @@ import Data.Semigroup ((<>))
 import Herpes.Form (Field (..), Form, labeledForm, textField)
 
 import qualified Graphics.UI.Gtk as Gtk
-import qualified System.Glib.Attributes as Glib
 
 newtype GtkForm a =
   GtkForm { runGtkForm :: IO ([Gtk.Widget], IO a) }
@@ -40,14 +39,9 @@ renderField (LabelField text) = do
   pure ([Gtk.toWidget label], pure ())
 
 renderField (TextField value) = do
-  textView <- Gtk.textViewNew
-  textBuffer <- Glib.get textView Gtk.textViewBuffer
-  Gtk.textBufferSetText textBuffer value
-  let getValue = do
-        startIter <- Gtk.textBufferGetStartIter textBuffer
-        endIter   <- Gtk.textBufferGetEndIter   textBuffer
-        Gtk.textBufferGetText textBuffer startIter endIter False
-  pure ([Gtk.toWidget textView], getValue)
+  entry <- Gtk.entryNew
+  Gtk.entrySetText entry value
+  pure ([Gtk.toWidget entry], Gtk.entryGetText entry)
 
 example :: IO ()
 example = do
