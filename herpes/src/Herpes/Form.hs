@@ -7,9 +7,13 @@ module Herpes.Form
 
     -- * Composite forms
   , labeledField
+
+    -- * Simple wizards
+  , Wizard
   ) where
 
 import Control.Applicative.Free (Ap, liftAp)
+import Control.Monad.Free (Free)
 import Data.Functor.Coyoneda (Coyoneda, liftCoyoneda)
 import Data.Text (Text)
 
@@ -33,3 +37,8 @@ textField = liftAp . liftCoyoneda . TextField
 
 labeledField :: Text -> Form a -> Form a
 labeledField l f = labelField l *> f
+
+--------------------------------------------------------------------------------
+-- Simple wizards
+
+type Wizard = Free Form
