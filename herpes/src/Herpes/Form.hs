@@ -13,10 +13,10 @@ type Form = Ap (Coyoneda Field)
 
 data Field :: * -> * where
   LabelField :: Text -> Field ()
-  TextField :: Field Text
+  TextField :: Text -> Field Text
 
 labelField :: Text -> Form ()
 labelField = liftAp . liftCoyoneda . LabelField
 
-textField :: Form Text
-textField = liftAp . liftCoyoneda $ TextField
+textField :: Text -> Form Text
+textField = liftAp . liftCoyoneda . TextField
