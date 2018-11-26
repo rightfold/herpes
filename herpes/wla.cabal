@@ -11,7 +11,8 @@ library
     exposed-modules:
         Herpes.Form,
         Herpes.Form.Generic,
-        Herpes.Form.Gtk
+        Herpes.Form.Gtk,
+        Herpes.Report
 
     default-language:
         Haskell2010
@@ -23,16 +24,22 @@ library
 
     default-extensions:
         ApplicativeDo,
+        ConstraintKinds,
         DataKinds,
         DeriveAnyClass,
+        DeriveFoldable,
         DeriveFunctor,
         DeriveGeneric,
+        DeriveTraversable,
         DerivingStrategies,
         EmptyCase,
         FlexibleContexts,
+        FlexibleInstances,
+        FunctionalDependencies,
         GADTs,
         KindSignatures,
         MonadComprehensions,
+        MultiParamTypeClasses,
         OverloadedStrings,
         ScopedTypeVariables,
         StrictData,
@@ -43,5 +50,9 @@ library
         free,
         generics-sop,
         gtk,
+        hashable,
         kan-extensions,
-        text
+        lens,
+        mtl,
+        text,
+        unordered-containers
