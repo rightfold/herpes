@@ -6,6 +6,8 @@ module Herpes.Report
   , insert
   , lookup
   , explore
+  , width
+  , height
 
     -- * State
   , HasReport (..)
@@ -58,9 +60,15 @@ lookup = (. reportValues) . HashMap.lookup
 
 explore :: Report a -> [[Maybe a]]
 explore r =
-  flip fmap [1 .. reportHeight r] $ \y ->
-  flip fmap [1 .. reportWidth  r] $ \x ->
-  HashMap.lookup (Coordinate (pred x) (pred y)) (reportValues r)
+  flip fmap [1 .. reportHeight r] $ \(pred -> y) ->
+  flip fmap [1 .. reportWidth  r] $ \(pred -> x) ->
+  HashMap.lookup (Coordinate x y) (reportValues r)
+
+width :: Report a -> Word
+width = reportWidth
+
+height :: Report a -> Word
+height = reportHeight
 
 --------------------------------------------------------------------------------
 -- State
