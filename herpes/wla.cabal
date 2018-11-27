@@ -12,7 +12,8 @@ library
         Herpes.Form,
         Herpes.Form.Generic,
         Herpes.Form.Gtk,
-        Herpes.Report
+        Herpes.Report,
+        Herpes.Report.Gtk
 
     default-language:
         Haskell2010
@@ -43,7 +44,8 @@ library
         OverloadedStrings,
         ScopedTypeVariables,
         StrictData,
-        TypeApplications
+        TypeApplications,
+        ViewPatterns
 
     build-depends:
         base,
