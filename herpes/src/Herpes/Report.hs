@@ -58,9 +58,9 @@ lookup = (. reportValues) . HashMap.lookup
 
 explore :: Report a -> [[Maybe a]]
 explore r =
-  flip fmap [0 .. reportHeight r - 1] $ \y ->
-  flip fmap [0 .. reportWidth  r - 1] $ \x ->
-  HashMap.lookup (Coordinate x y) (reportValues r)
+  flip fmap [1 .. reportHeight r] $ \y ->
+  flip fmap [1 .. reportWidth  r] $ \x ->
+  HashMap.lookup (Coordinate (pred x) (pred y)) (reportValues r)
 
 --------------------------------------------------------------------------------
 -- State
