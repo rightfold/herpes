@@ -3,8 +3,12 @@
 , free
 , generics-sop
 , gtk
+, hashable
 , kan-extensions
-, text }:
+, lens
+, mtl
+, text
+, unordered-containers }:
 mkDerivation {
     pname = "wla";
     version = "0.0.0.0";
@@ -15,7 +19,11 @@ mkDerivation {
         free
         generics-sop
         gtk
+        hashable
         kan-extensions
+        lens
+        mtl
         text
+        unordered-containers
     ];
 }
