@@ -13,7 +13,9 @@ library
         Herpes.Form.Generic,
         Herpes.Form.Gtk,
         Herpes.Report,
-        Herpes.Report.Gtk
+        Herpes.Report.Gtk,
+        Herpes.Screen,
+        Herpes.Screen.Gtk
 
     default-language:
         Haskell2010
