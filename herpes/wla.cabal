@@ -45,6 +45,7 @@ library
         MonadComprehensions,
         MultiParamTypeClasses,
         OverloadedStrings,
+        ParallelListComp,
         ScopedTypeVariables,
         StrictData,
         TypeApplications,
@@ -60,4 +61,5 @@ library
         lens,
         mtl,
         text,
+        thyme,
         unordered-containers

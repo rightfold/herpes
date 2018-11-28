@@ -8,6 +8,7 @@
 , lens
 , mtl
 , text
+, thyme
 , unordered-containers }:
 mkDerivation {
     pname = "wla";
@@ -24,6 +25,7 @@ mkDerivation {
         lens
         mtl
         text
+        thyme
         unordered-containers
     ];
 }
