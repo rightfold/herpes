@@ -1,8 +1,8 @@
 module Herpes.Motd
   ( -- * Screen
-    motdScreen
-  , motdQuery
-  , motdAction
+    screen
+  , query
+  , action
 
     -- * Data
   , Message (..)
@@ -26,14 +26,14 @@ import qualified Herpes.Report as Report
 --------------------------------------------------------------------------------
 -- Screen
 
-motdScreen :: Functor f => f [Message] -> Screen f
-motdScreen = Screen motdQuery . motdAction
+screen :: Functor f => f [Message] -> Screen f
+screen = Screen query . action
 
-motdQuery :: Form ()
-motdQuery = pure ()
+query :: Form ()
+query = pure ()
 
-motdAction :: Functor f => f [Message] -> () -> f (Report Value)
-motdAction getMessages () = do
+action :: Functor f => f [Message] -> () -> f (Report Value)
+action getMessages () = do
   messages <- getMessages
   pure $ foldr ($) Report.empty $
     [ Report.insert (Coordinate 0 y) (TextValue (Text.pack (show posted))) .
@@ -65,7 +65,7 @@ example = do
                          , Message (time 3) "Hallo"
                          , Message (time 2) "Hola"
                          , Message (time 1) "今日は" ]
-  widget <- renderScreen (motdScreen getMessages)
+  widget <- renderScreen (screen getMessages)
 
   window <- Gtk.windowNew
   Gtk.containerAdd window widget
