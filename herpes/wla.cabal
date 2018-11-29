@@ -12,6 +12,7 @@ library
         Herpes.Form,
         Herpes.Form.Generic,
         Herpes.Form.Gtk,
+        Herpes.Motd,
         Herpes.Report,
         Herpes.Report.Gtk,
         Herpes.Screen,
@@ -44,6 +45,7 @@ library
         MonadComprehensions,
         MultiParamTypeClasses,
         OverloadedStrings,
+        ParallelListComp,
         ScopedTypeVariables,
         StrictData,
         TypeApplications,
@@ -59,4 +61,5 @@ library
         lens,
         mtl,
         text,
+        thyme,
         unordered-containers
