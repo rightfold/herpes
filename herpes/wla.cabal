@@ -16,7 +16,10 @@ library
         Herpes.Report,
         Herpes.Report.Gtk,
         Herpes.Screen,
-        Herpes.Screen.Gtk
+        Herpes.Screen.Gtk,
+        Herpes.UseCase,
+        Herpes.Workspace,
+        Herpes.Workspace.Gtk
 
     default-language:
         Haskell2010
@@ -41,6 +44,7 @@ library
         FlexibleInstances,
         FunctionalDependencies,
         GADTs,
+        GeneralizedNewtypeDeriving,
         KindSignatures,
         MonadComprehensions,
         MultiParamTypeClasses,
