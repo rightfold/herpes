@@ -9,6 +9,7 @@ library
         src
 
     exposed-modules:
+        Herpes.Erpl.Syntax,
         Herpes.Form,
         Herpes.Form.Generic,
         Herpes.Form.Gtk,
