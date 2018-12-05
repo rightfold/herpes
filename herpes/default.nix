@@ -4,6 +4,7 @@
 , generics-sop
 , gtk
 , hashable
+, haskell-src-exts
 , kan-extensions
 , lens
 , mtl
@@ -21,6 +22,7 @@ mkDerivation {
         generics-sop
         gtk
         hashable
+        haskell-src-exts
         kan-extensions
         lens
         mtl

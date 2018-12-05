@@ -10,6 +10,7 @@ library
 
     exposed-modules:
         Herpes.Erpl.Syntax,
+        Herpes.Erpl.Translate,
         Herpes.Form,
         Herpes.Form.Generic,
         Herpes.Form.Gtk,
@@ -52,6 +53,7 @@ library
         MultiParamTypeClasses,
         OverloadedStrings,
         ParallelListComp,
+        PatternSynonyms,
         ScopedTypeVariables,
         StrictData,
         TypeApplications,
@@ -63,6 +65,7 @@ library
         generics-sop,
         gtk,
         hashable,
+        haskell-src-exts,
         kan-extensions,
         lens,
         mtl,
