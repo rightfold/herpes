@@ -13,6 +13,7 @@ library
         Herpes.Form,
         Herpes.Form.Generic,
         Herpes.Form.Gtk,
+        Herpes.Identifier,
         Herpes.Motd,
         Herpes.Report,
         Herpes.Report.Gtk,

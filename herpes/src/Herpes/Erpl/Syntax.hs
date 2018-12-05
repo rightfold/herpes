@@ -1,16 +1,12 @@
 module Herpes.Erpl.Syntax
-  ( Identifier (..)
-  , Module (..)
+  ( Module (..)
   , FormElement (..)
   , Statement (..)
   , Expression (..)
   ) where
 
 import Data.Text (Text)
-
-newtype Identifier =
-  Identifier Text
-  deriving stock (Eq, Show)
+import Herpes.Identifier (Identifier)
 
 data Module a
   = UseCaseModule a Identifier [FormElement a] [Statement a]
